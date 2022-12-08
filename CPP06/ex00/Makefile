@@ -1,0 +1,48 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: halwahed <halwahed@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/12/05 16:50:36 by halwahed          #+#    #+#              #
+#    Updated: 2022/12/08 14:50:23 by halwahed         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
+NAME	=	convert
+
+CC		=	c++
+
+FLAG	=	-c				\
+			-Wall			\
+			-Wextra			\
+			-Werror			\
+			-std=c++98
+
+SANIT	=	-fsanitize=address
+
+RM		=	@/bin/rm -rf
+
+SRCS	=	main.cpp		\
+			Convert.cpp
+OBJS 	=	$(SRCS:%.cpp=%.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(SANIT) -o $@ $^
+
+$(OBJS): $(SRCS)
+	$(CC) $(FLAG) -c $(SRCS)
+
+clean:
+	$(RM) $(OBJS)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
